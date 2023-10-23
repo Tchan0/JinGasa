@@ -53,7 +53,7 @@ Audio (AICA) is not initialized yet (TODO).
     * CN1 pins (cfr [OzOnE's analysis](https://www.arcade-projects.com/threads/converting-gdrom-naomi-games-to-cart.1691/post-183676)):
     
     ![CN1 pins](doc/cn1_pins.png)
-    * Naomi2: By default, RXD2 and CTS2 are disabled. To enable them,  JP6 and JP7 should be populated / pins 1-2 should be connected. (RXD2 is linked to JP6-1, and CTS2 to JP7-1)
+    * Naomi2: By default, RXD2 and CTS2 are disabled. To enable them,  JP6 and JP7 should be populated / pins 1-2 should be connected, and the trace between pins 2-3 at the back of the board should be cut. (RXD2 is linked to JP6-1, and CTS2 to JP7-1)
 
     ![Naomi2 JP6-JP7](doc/naomi2_jp67.png)
     * The connector is a [100-pin Omron XH3 connector](https://www.digikey.com/en/products/filter/arrays-edge-type-mezzanine-board-to-board/308?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRADYB2AJkoBYQBdAgBwBcoQBlNgJwEsAdgHMQAXzEFqpIgFtehQQAIAHgAsAzEzFA)
