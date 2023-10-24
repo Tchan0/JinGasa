@@ -49,7 +49,7 @@ Audio (AICA) is not initialized yet (TODO).
 * The Naomi 1/2 exposes the SH-4 SCIF serial pins in 1 or 2 ways:
   * via the internal CN1 100-pin connector:
     * available on all Naomi 1 & 2
-    * max baudrate: TODO
+    * max baudrate: 1562500
     * CN1 pins (cfr [OzOnE's analysis](https://www.arcade-projects.com/threads/converting-gdrom-naomi-games-to-cart.1691/post-183676)):
     
     ![CN1 pins](doc/cn1_pins.png)
