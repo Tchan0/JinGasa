@@ -47,8 +47,8 @@ Audio (AICA) is not initialized yet (TODO).
 
 ## Naomi 1 variants
 * Certain Naomi 1 boards (the later revisions) have 5 populated jumpers JP9 to JP13.
-  * [cfr Mame source code](https://github.com/mamedev/mame/blob/087233e15b48c664427c44792f9b97c07892f2eb/src/mame/sega/naomi.cpp#L86C9-L86C9):
 * This indicates that serial communication will also be possible via the CN8 connector on the filter board.
+* [cfr Mame source code](https://github.com/mamedev/mame/blob/087233e15b48c664427c44792f9b97c07892f2eb/src/mame/sega/naomi.cpp#L86C9-L86C9):
   * without: models 837-13707 (171-7772F/837-13544-01)
   * with: models 837-14351 (171-8183C) and 837-14601 (171-8183E).
 * TODO: insert images
