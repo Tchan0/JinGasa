@@ -45,6 +45,14 @@ Audio (AICA) is not initialized yet (TODO).
   * Burn JinGasa.bin using an [eprom programmer](https://www.ebay.com/sch/i.html?_nkw=eprom+programmer)
     * Before buying a programmer, make sure the ST M27C160-100F1 is listed in the supported devices of that programmer !
 
+## Naomi 1 variants
+* Certain Naomi 1 boards (the later revisions) have 5 populated jumpers JP9 to JP13.
+  * [cfr Mame source code](https://github.com/mamedev/mame/blob/087233e15b48c664427c44792f9b97c07892f2eb/src/mame/sega/naomi.cpp#L86C9-L86C9):
+* This indicates that serial communication will also be possible via the CN8 connector on the filter board.
+  * without: models 837-13707 (171-7772F/837-13544-01)
+  * with: models 837-14351 (171-8183C) and 837-14601 (171-8183E).
+* TODO: insert images
+
 ## Naomi 1 / 2
 * The Naomi 1/2 exposes the SH-4 SCIF serial pins in 1 or 2 ways:
   * via the internal CN1 100-pin connector:
@@ -53,21 +61,20 @@ Audio (AICA) is not initialized yet (TODO).
     * CN1 pins (cfr [OzOnE's analysis](https://www.arcade-projects.com/threads/converting-gdrom-naomi-games-to-cart.1691/post-183676)):
     
     ![CN1 pins](doc/cn1_pins.png)
+    * Naomi 1 without JP9-JP13: CN1 SCIF works out-of-the-box, nothing special needed.
+    * Naomi 1 with JP9-JP13: TODO, probably similar to Naomi2.
     * Naomi2: By default, RXD2 and CTS2 are disabled on CN1. To enable them, JP6 and JP7 should be populated / pins 1-2 should be connected, and the trace between pins 2-3 at the back of the board should be cut (RXD2 is linked to JP6-2, and CTS2 to JP7-2).
 
     ![Naomi2 JP6-JP7](doc/naomi2_jp67.png)
     * The connector is a [100-pin Omron XH3 connector](https://www.digikey.com/en/products/filter/arrays-edge-type-mezzanine-board-to-board/308?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRADYB2AJkoBYQBdAgBwBcoQBlNgJwEsAdgHMQAXzEFqpIgFtehQQAIAHgAsAzEzFA)
   * via the external CN8 connector on the filter board:
-    * available on all Naomi 2, but only some Naomi 1:
-      * [cfr Mame source code](https://github.com/mamedev/mame/blob/087233e15b48c664427c44792f9b97c07892f2eb/src/mame/sega/naomi.cpp#L86C9-L86C9): Only the latest revisions of the Naomi 1 seem to have this possibility:
-        * without RS-232: 837-13707 (171-7772F/837-13544-01)
-        * with RS-232: 837-14351 (171-8183C) and 837-14601 (171-8183E).
+    * available on all Naomi 2, but only on Naomi 1 that have JP9-JP13.
     * max baudrate: 390625
     * <font color="red">DANGER !</font>
       * [According to Mame](https://github.com/mamedev/mame/blob/087233e15b48c664427c44792f9b97c07892f2eb/src/mame/sega/naomi.cpp#L90), the Naomi 2 uses <font color="red">**12V voltage levels**</font> on CN8, while the Naomi 1 uses <font color="red">**3V3 voltage levels**</font> ! I haven't checked this myself, since I don't have a Naomi 1 with RS-232 (TODO) !
     * Prerequisite:
       * set JP9 to JP13 to 2-3. ([cfr Mame source](https://github.com/mamedev/mame/blob/master/src/mame/sega/naomi.cpp))
-        * Naomi1: TODO
+        * Naomi1 with JP9-JP13: TODO
         * Naomi2: ![Naomi2 JP9-13](doc/naomi_jp.png)
     * CN8 pins (Naomi2. Not verified on Naomi1 (TODO)):
       * 1,2,4,5 (RXD, TXD, RTS, CTS), 3 and 6 are GND ([cfr Arcade Projects source](https://www.arcade-projects.com/threads/naomi-2-chihiro-triforce-card-reader-emulator-initial-d3-wmmt-mario-kart-f-zero-ax.814/post-13129))
