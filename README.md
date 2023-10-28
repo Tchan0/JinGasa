@@ -28,6 +28,7 @@ It also assumes VGA output.
 
 Audio (AICA) is not initialized yet (TODO).
 
+
 ## Building
 * To compile it, you need:
   * a file with the DC BIOS (preferably 1.01d), to extract the font 
@@ -38,12 +39,14 @@ Audio (AICA) is not initialized yet (TODO).
   * edit the Makefile to your paths !
   * make
 
+
 ## Burning
 * To burn JinGasa.bin on a 2MB UV-eprom ST M27C160-100F1:
   * Erase the chip using an [eprom UV eraser](https://www.ebay.com/sch/i.html?_nkw=eprom+uv+eraser)
     * Depending on the UV eraser, you may need 15 to 30 minutes of erasure time.
   * Burn JinGasa.bin using an [eprom programmer](https://www.ebay.com/sch/i.html?_nkw=eprom+programmer)
     * Before buying a programmer, make sure the ST M27C160-100F1 is listed in the supported devices of that programmer !
+
 
 ## Naomi 1 variants
 * Certain Naomi 1 boards (the later revisions) have 5 populated jumpers JP9 to JP13.
@@ -52,6 +55,7 @@ Audio (AICA) is not initialized yet (TODO).
   * without: models 837-13707 (171-7772F/837-13544-01)
   * with: models 837-14351 (171-8183C) and 837-14601 (171-8183E).
 * TODO: insert images
+
 
 ## Naomi 1 / 2
 * The Naomi 1/2 exposes the SH-4 SCIF serial pins in 1 or 2 ways:
@@ -93,7 +97,7 @@ Audio (AICA) is not initialized yet (TODO).
     * The connector is a [100-pin Omron XH3 connector](https://www.digikey.com/en/products/filter/arrays-edge-type-mezzanine-board-to-board/308?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRADYB2AJkoBYQBdAgBwBcoQBlNgJwEsAdgHMQAXzEFqpIgFtehQQAIAHgAsAzEzFA)
   * via the CN16 connector:
     * currently not working/not verified, because the nEN pin of the ADM3222 is at 3.3V = disabled. Investigation needed to see how to enable this (TODO).
-    * max baudrate: 390625 (ADM3222 is rated at max 460 kbps)
+    * max baudrate: 781250
     * <font color="red">DANGER !</font>
       * Requires <font color="red">**RS232 signal-level (typically 9-12V)**</font> on the pins !
     * CN16 pins:
@@ -101,6 +105,8 @@ Audio (AICA) is not initialized yet (TODO).
       ![System SP CN16 pinout](doc/systemsp_cn16.png)
     * The CN16 connector is a [JST NH 10pin BS10P-SHF-1AA](https://www.digikey.com/en/products/detail/jst-sales-america-inc/BS10P-SHF-1AA-LF-SN/9954068?s=N4IgTCBcDaIEIGUCMAGACgWgQCQGIaQEFCQBdAXyA)
 * [Mame System SP info](https://github.com/mamedev/mame/blob/master/src/mame/sega/segasp.cpp)
+
+
 ## Katana SET5
 * The SET5 exposes the SH-4 SCIF serial pins via the Modem board, to the external connector marked "SERIAL"
   * This is a regular RS232 (12V) output
