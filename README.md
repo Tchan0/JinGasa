@@ -96,7 +96,7 @@ Audio (AICA) is not initialized yet (TODO).
     ![CN1 pins](doc/cn1_pins.png)
     * The connector is a [100-pin Omron XH3 connector](https://www.digikey.com/en/products/filter/arrays-edge-type-mezzanine-board-to-board/308?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRADYB2AJkoBYQBdAgBwBcoQBlNgJwEsAdgHMQAXzEFqpIgFtehQQAIAHgAsAzEzFA)
   * via the CN16 connector:
-    * currently not working/not verified, because the nEN pin of the ADM3222 is at 3.3V = disabled. Investigation needed to see how to enable this (TODO).
+    * (in progress - code not included here yet - thanks to MettaliC, we know that it needs an extra initialiation - of a "IO Control" register at 0xA101011C)
     * max baudrate: 781250
     * <font color="red">DANGER !</font>
       * Requires <font color="red">**RS232 signal-level (typically 9-12V)**</font> on the pins !
