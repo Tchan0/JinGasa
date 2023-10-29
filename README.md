@@ -151,7 +151,7 @@ Audio (AICA) is not initialized yet (TODO).
 
 
 ## Big Thanks to
-* [Colton](https://github.com/cepawiel) for all the good tips during this project, and for finding the Naomi2's JP6-JP7 functionality.
+* [Colton](https://github.com/cepawiel) for all the good tips during this project, for finding the Naomi2's JP6-JP7 functionality, and for finding & testing SCIF on CN11 on the System SP.
 * OzOnE for the [Naomi pinouts](https://www.arcade-projects.com/threads/converting-gdrom-naomi-games-to-cart.1691/post-183676)
 * MetalliC for - amongst others - explaining how to enable the CN16 serial on the System SP
 * [Mame](https://www.mamedev.org/index.php) for all the low-level info
