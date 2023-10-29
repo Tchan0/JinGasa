@@ -94,7 +94,9 @@ Audio (AICA) is not initialized yet (TODO).
     * CN11 pins - similar to the Naomi (cfr [OzOnE's analysis](https://www.arcade-projects.com/threads/converting-gdrom-naomi-games-to-cart.1691/post-183676)):
 
     ![CN1 pins](doc/cn1_pins.png)
-    * RXD2 and CTS2 seem to be disabled - not sure yet if not connected at all, or needing some I/O initialization to make it work (TODO). Can be made working by soldering 2 cables from the CN11 to resistors on the back of the board: CN11-RXD2 -> R16S, and CN11-CTS2 -> R32S (TODO: insert pic)
+    * RXD2 and CTS2 seem to be disabled - not sure yet if not connected at all, or needing some I/O initialization to make it work (TODO). Can be made working by soldering 2 cables from the CN11 to resistors on the back of the board: CN11-RXD2 -> R16S, and CN11-CTS2 -> R32S
+
+    ![CN11 RXD2_CTS2](SystemSP_CN11_RXD2_CTS2_Colton.jpg)
     * The connector is a [100-pin Omron XH3 connector](https://www.digikey.com/en/products/filter/arrays-edge-type-mezzanine-board-to-board/308?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRADYB2AJkoBYQBdAgBwBcoQBlNgJwEsAdgHMQAXzEFqpIgFtehQQAIAHgAsAzEzFA)
   * via the CN16 connector:
     * (in progress - code not included here yet - thanks to MetalliC, we know that it needs an extra initialiation - of a "IO Control" register at 0xA101011C)
