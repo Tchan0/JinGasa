@@ -9,6 +9,19 @@
     .text
 
 .start:
+!///////////////////////////////////////////////////////////////////////////////
+!// make sure to run in the P2 non-cacheable area (0xA0000000 - 0xBFFFFFFF)
+!///////////////////////////////////////////////////////////////////////////////
+ .SH4_switch_to_P2:
+    mov.l JINGASA_INIT_ADDR, R0 
+    mov.l RAM_ADDRESS_MASK, R1
+    and R1, R0                            ! remove the P-Area bits
+    mov.l RAM_AREA_P2_MASK, R1
+    or R1, R0                             ! set the P-Area to P2 non-cacheable area
+	jmp	@R0
+	nop
+    nop                                   ! for alignment
+
 _jinGasa_init:
 
 !///////////////////////////////////////////////////////////////////////////////
@@ -60,6 +73,12 @@ dcloadserial_copy_loop:
 JINGASA_START_ADDR:
     .long        .start                   ! Where this BIOS is loaded in RAM. Will be used for relative offsets
 
+RAM_ADDRESS_MASK:
+    .long        0x1FFFFFFF
+RAM_AREA_P2_MASK:
+    .long        0xA0000000
+JINGASA_INIT_ADDR:
+    .long        _jinGasa_init
 SH4_INIT_ADDR:
     .long        _SH4_init
 HOLLY_INIT_ADDR:
