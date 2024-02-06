@@ -66,9 +66,32 @@ _SH4_init:
     mov.l BSC_RFCR_ADDR, R2
     mov.w R1, @R2
 
-    mov.l BSC_MCR_DATA, R1                ! Memory control register (MCR, 32bits)
-    mov.l BSC_MCR_ADDR, R2
+.RAM_size_check:
+    mov.l MAGIC_VALUE_ERASE, R0          ! erase 0x8D050000 <- 0x00000000
+    mov.l MAGIC_VALUE_ADDR, R1
+    mov.l R0, @R1
+    mov.l MAGIC_VALUE_16MB, R2           ! write 16MB_MAGIC at address 0x8C050000
+    mov.l MAGIC_VALUE_CMP_ADDR, R3
+    mov.l R2, @R3
+
+    mov.l @R1, R0                        ! read 0x8D050000 that was erased previously
+                                         !  if it contains "16MB", that means we're in mirrored RAM, so we only have 16MB (else 32MB)
+    CMP/EQ R0, R2
+    BT _RAM_size_16MB
+    NOP
+_RAM_size_32MB:
+    mov.l STACK_INIT_32MB, R15           ! Stack Pointer Initialization
+    mov.l BSC_MCR_32MB, R1
+    BRA _set_RAM_size
+    NOP
+_RAM_size_16MB:
+    mov.l STACK_INIT_16MB, R15           ! Stack Pointer Initialization
+    mov.l BSC_MCR_16MB, R1
+_set_RAM_size:
+    mov.l BSC_MCR_ADDR, R2               ! Memory control register (MCR, 32bits)
     mov.l R1, @R2
+    NOP
+    NOP  
 
     mov.l BSC_SDMR3_DATA, R1              ! SDRAM mode register for area 3 (SDMR3, 8bits)
     mov.l BSC_SDMR3_ADDR, R2      ! TODO ? SDMR2 ?
@@ -93,14 +116,6 @@ _SH4_init:
     mov.l DMAC_DMAOR_DATA, R1            ! DMA operation register: 
     mov.l DMAC_DMAOR_ADDR, R2            !  enable all channels & 
     mov.l R1, @R2                        !  priority: CH2 > CH0 > CH1 > CH3
-
-!///////////////////////////////////////////////////////////////////////////////
-!// Stack Pointer Initialization
-!///////////////////////////////////////////////////////////////////////////////
-.SH4_stack_init:
-    mov.l STACK_INIT_32MB, R15
-
-! TODO: .SH4_stack_16MB dynamic
 
 !///////////////////////////////////////////////////////////////////////////////
 !// end
@@ -150,8 +165,10 @@ BSC_WCR3_DATA:                           !    Bios:    0x07777777
 
 BSC_MCR_ADDR:                            ! Memory control register:
     .long        0xFF800014              !    Initial: 0x00000000
-BSC_MCR_DATA:                            !    Bios: (16MB): 0xC00A0E24          32MB: 0xC0121214, 16MB: 0xC0091224
+BSC_MCR_16MB:                            !    Bios: (16MB): 0xC00A0E24          32MB: 0xC0121214, 16MB: 0xC0091224
     .long        0xC00A0E24              !
+BSC_MCR_32MB:                            !    Bios: (16MB): 0xC00A0E24          32MB: 0xC0121214, 16MB: 0xC0091224
+    .long        0xC0121214              !
 
 BSC_RTCSR_ADDR:                          ! Refresh timer control/status register:
     .long        0xFF80001C              !    Initial: 0x0000
@@ -200,3 +217,13 @@ STACK_INIT_16MB:
     .long        0x8d000000
 STACK_INIT_32MB:
     .long        0x8e000000
+
+MAGIC_VALUE_ERASE:
+    .long        0x00000000
+MAGIC_VALUE_ADDR:
+    .long        0xAD050000
+MAGIC_VALUE_CMP_ADDR:
+    .long        0xAC050000
+MAGIC_VALUE_16MB:
+    .long        0x424D3631
+
