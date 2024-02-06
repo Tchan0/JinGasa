@@ -22,9 +22,9 @@ The only things JinGasa does are:
 
 Hence, it only uses the SH-4 SCIF serial pins, not the MIE pins.
 
-It's currently hardcoded to 32MB RAM in the source code (easy to change).
+It auto-detects 16 and 32 MB RAM.
 
-It also assumes VGA output.
+It assumes VGA output.
 
 Audio (AICA) is not initialized yet (TODO).
 
@@ -34,6 +34,15 @@ Audio (AICA) is not initialized yet (TODO).
   * a file with the DC BIOS (preferably 1.01d), to extract the font 
   * a gcc compiler for sh-elf
   * download and compile [dcload-serial](https://github.com/KallistiOS/dcload-serial), so that /target-src/1st_read/loader.bin exists
+    * Before compiling, hardcode dcload-ser to VGA: 
+      * in target-src/dcload/video.s - _check_cable: change the 3 first commands:
+      * MOV   #0,R0		!by T - for Naomi & System SP - Tmp test, since KOS also does not know how to check the cable
+      * RTS             ! note: I commented out the 3 next commands, so that the size of the bin remains the same
+      * NOP 
+      * ! set PORT8 and PORT9 to input
+      * ! mov.l	porta,r0
+      * ! mov.l	pctra_clr,r2
+      * ! mov.l	@r0,r1
 * Build JinGasa.bin:
   * cd src
   * edit the Makefile to your paths !
@@ -115,7 +124,7 @@ Audio (AICA) is not initialized yet (TODO).
   * This is a regular RS232 (12V) output
   * Max baudrate: 520833
     * Faster speeds probably possible by bypassing the modem, and connecting directly to the SET5 motherboard.
-* JinGasa is currently hardcoded to work with 32MB RAM, so if your SET5 only has 16MB RAM, adapt SH4_stack_init in [SH4.s](src/SH4.s) to 16MB.
+
 
 ## Connection to your USB-Serial adapter
 * Connect the Naomi/System SP pins to your USB-Serial adapter like this:
