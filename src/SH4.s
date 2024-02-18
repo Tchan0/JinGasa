@@ -10,19 +10,6 @@
 _SH4_init:
 
 !///////////////////////////////////////////////////////////////////////////////
-!// make sure to run in the P2 non-cacheable area (0xA0000000 - 0xBFFFFFFF)
-!///////////////////////////////////////////////////////////////////////////////
-.SH4_switch_to_P2:
-    mov.l SH4_CCR_init_ADDR, R0 
-    mov.l RAM_ADDRESS_MASK, R1
-    and R1, R0                            ! remove the P-Area bits
-    mov.l RAM_AREA_P2_MASK, R1
-    or R1, R0                             ! set the P-Area to P2 non-cacheable area
-	jmp	@R0
-	nop
-    nop                                   ! for alignment
-
-!///////////////////////////////////////////////////////////////////////////////
 !// Cache Controler (CCR) Initialization
 !///////////////////////////////////////////////////////////////////////////////
 .SH4_CCR_init:
@@ -128,13 +115,6 @@ _set_RAM_size:
 !///////////////////////////////////////////////////////////////////////////////
     .align 4
 
-SH4_CCR_init_ADDR:
-    .long .SH4_CCR_init
-
-RAM_ADDRESS_MASK:
-    .long        0x1FFFFFFF
-RAM_AREA_P2_MASK:
-    .long        0xA0000000
 
 CACHE_CCR_ADDR:                          ! Cache control register (CCR):
     .long        0xFF00001C              !    Initial: 0x00000000
